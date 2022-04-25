@@ -15,7 +15,7 @@ const createFood =(req,res)=>{
 // get all menu
 const getMenu =async(req,res)=>{
     const foods = await Food.find();
-    res.status(200),json(foods);
+    res.status(200).json(foods);
 }
 
 module.exports={createFood , getMenu}
