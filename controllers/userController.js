@@ -28,5 +28,32 @@ if(user){
             message:"invalid data",
         });
     }
+};
+//auth a user
+async function loginUser(req,res){
+    try{
+        const {email,password}=req.body
+        const user =await User.findOne({email})
+        if(user){
+            const isMatch=await bcrypt.compare(password,user.password)
+      
+        if(isMatch){
+            res.status(200).json({
+                username:user.username,
+                email:user.email,
+                id:user._id,
+                token:generateToken(user._id),
+            });
+        }else{
+            res.status(401).json({
+                message:"invalid password",
+            });
+        }
+    }
+    }catch{
+        res.status(400).json({
+            message:"User not found",
+        })
+    }
 }
-module.exports=createUser
+module.exports={ createUser, loginUser}

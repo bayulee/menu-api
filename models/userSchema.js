@@ -1,24 +1,26 @@
-const mongoose=require("mongoose")
+const mongoose= require("mongoose");
+const { boolean } = require("yup");
 
-
-const userSchema = mongoose.Schema({
+const userSchema= mongoose.Schema({
     username:{
         type:String,
         required:true,
-        unique:true
+        unique:true,
     },
     email:{
         type:String,
         required:true,
-        unique:true
+        unique:true,
 },
     password:{
         type:String,
-        require:true
+        require:true,
+},
+   isAdmin:{
+    type:boolean,
+    default:false,
 }
   
-},{
-    timestamps:true,
 }
 )
 const User=mongoose.model("User", userSchema);
